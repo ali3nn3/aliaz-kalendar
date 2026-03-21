@@ -20,14 +20,26 @@ async def make_screenshot():
         
         print(f"Otevírám URL: {URL_GOOGLE_SCRIPTU}")
         # Přejdeme na URL a počkáme, až se načte síťový provoz (networkidle)
-        # To je jistota, že se načetly všechny kalendáře z GAS.
         await page.goto(URL_GOOGLE_SCRIPTU, wait_until="networkidle")
         
         # Volitelné: Počkáme ještě chvíli pro jistotu (např. 2 sekundy)
         await page.wait_for_timeout(2000)
 
+        # ------------------------------------------------------------
+        ### SKRÝT GOOGLE UPOZORNĚNÍ ###
+        # Tento kód najde CSS třídu, kterou Google používá pro ten proužek,
+        # a nastaví jí 'display: none', čímž ji skryje.
+        try:
+            # Google často mění názvy tříd, ale '.apps-script-developer-banner'
+            # je momentálně standard.
+            await page.add_style_tag(content=".apps-script-developer-banner { display: none !important; }")
+            print("Google Apps Script proužek byl skryt.")
+        except Exception as e:
+            print(f"Nepodařilo se skrýt Google proužek (možná Google změnil CSS): {e}")
+        # ------------------------------------------------------------
+
         print(f"Dělám screenshot do: {VYSTUPNI_SOUBOR}")
-        # Uděláme screenshot. 'colorspace: "gray"' se pokusí o převod do šedi už v prohlížeči.
+        # Uděláme screenshot.
         await page.screenshot(path=VYSTUPNI_SOUBOR, full_page=False)
         
         await browser.close()
