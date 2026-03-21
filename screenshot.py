@@ -24,7 +24,7 @@ async def make_screenshot():
         browser = await p.chromium.launch()
         
         # Nastavíme velikost okna odpovídající displeji PocketBooku
-        page = await browser.new_page(viewport={'width': SIRKA, 'height': VYSKA})
+        page = await browser.new_page(viewport={'width': SIRKA, 'height': VYSKA_VYFOCENI})
         
         print(f"Otevírám URL: {URL_GOOGLE_SCRIPTU}")
         # Přejdeme na URL a počkáme, až se načte síťový provoz (networkidle)
