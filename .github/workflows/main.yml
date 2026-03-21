@@ -41,7 +41,12 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add kalendar.png
-          # Commitneme jen pokud se obrázek změnil, aby se repozitář neplnil zbytečně
-          git diff --quiet && git diff --staged --quiet || git commit -m "Automatická obnova kalendáře"
-          git push
+          
+          # Vynutíme přidání souboru
+          git add -f kalendar.png
+          
+          # Zkusíme commitnout. Pokud nejsou změny, skript neselže (díky || exit 0)
+          git commit -m "Automatická obnova kalendáře [$(date)]" || exit 0
+          
+          # Pushneme změny
+          git push origin main
