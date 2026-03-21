@@ -9,7 +9,13 @@ URL_GOOGLE_SCRIPTU = "https://script.google.com/macros/s/AKfycbxCqK-2hycXEZY6Mgr
 current_dir = os.path.dirname(os.path.abspath(__file__))
 VYSTUPNI_SOUBOR = os.path.join(current_dir, "kalendar.png")
 SIRKA = 800
-VYSKA = 600
+# Vyfotíme trochu víc na výšku, abychom měli co ořezávat
+VYSKA_VYFOCENI = 650 
+# Finální rozměry pro PocketBook
+SIRKA_FINÁLNÍ = 800
+VYSKA_FINÁLNÍ = 600
+# Kolik pixelů odshora oříznout (výška proužku + rezerva)
+ORIZNUTE_ODSHORA = 50
 # -------------------
 
 async def make_screenshot():
@@ -53,9 +59,20 @@ async def make_screenshot():
 
         # ------------------------------------------------------------
 
-        print(f"Dělám screenshot do: {VYSTUPNI_SOUBOR}")
-        # Uděláme screenshot.
-        await page.screenshot(path=VYSTUPNI_SOUBOR, full_page=False)
+        print(f"Dělám screenshot a ořezávám...")
+        # Vyfotíme jen viditelnou část (ne full_page), ale s větší výškou
+        # Poté ořízneme horní část (ORIZNUTE_ODSHORA)
+        # a zbytek bude mít rozměr [SIRKA_FINÁLNÍ x VYSKA_FINÁLNÍ]
+        await page.screenshot(
+            path=VYSTUPNI_SOUBOR,
+            full_page=False,
+            clip={
+                'x': 0,
+                'y': ORIZNUTE_ODSHORA,
+                'width': SIRKA_FINÁLNÍ,
+                'height': VYSKA_FINÁLNÍ
+            }
+        )
         
         await browser.close()
         print("Hotovo.")
