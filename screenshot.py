@@ -28,16 +28,29 @@ async def make_screenshot():
         await page.wait_for_timeout(2000)
 
         # ------------------------------------------------------------
-        ### SKRÝT GOOGLE UPOZORNĚNÍ ###
-        # Tento kód najde CSS třídu, kterou Google používá pro ten proužek,
-        # a nastaví jí 'display: none', čímž ji skryje.
+
+        ### SKRÝT GOOGLE UPOZORNĚNÍ (AGRESIVNÍ VERZE) ###
+        # Tento kód se pokusí najít a skrýt všechny podezřelé elementy.
         try:
-            # Google často mění názvy tříd, ale '.apps-script-developer-banner'
-            # je momentálně standard.
-            await page.add_style_tag(content=".apps-script-developer-banner { display: none !important; }")
-            print("Google Apps Script proužek byl skryt.")
+            # Selektory pro různé verze Google proužku:
+            # 1. Standardní CSS třída
+            # 2. Jakýkoliv div s vysokým z-indexem (často používaný pro překryvy)
+            # 3. Jakýkoliv iframe, který není v body (často používaný pro proužky)
+            css_to_hide = """
+                .apps-script-developer-banner { display: none !important; }
+                iframe[src*="google.com/macros/static"] { display: none !important; }
+                div[style*="z-index"] { display: none !important; }
+                body > iframe { display: none !important; }
+            """
+            await page.add_style_tag(content=css_to_hide)
+            print("Pokus o skrytí Google proužku (agresivní selektory).")
+            
+            # Volitelné: Počkáme sekundu, aby se změna projevila
+            await page.wait_for_timeout(1000)
+            
         except Exception as e:
-            print(f"Nepodařilo se skrýt Google proužek (možná Google změnil CSS): {e}")
+            print(f"Nepodařilo se skrýt Google proužek: {e}")
+
         # ------------------------------------------------------------
 
         print(f"Dělám screenshot do: {VYSTUPNI_SOUBOR}")
