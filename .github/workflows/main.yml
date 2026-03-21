@@ -1,0 +1,44 @@
+name: Obnovit Kalendar
+
+on:
+  schedule:
+    # Spustí se každou hodinu (v 0. minutu)
+    # Pozor: GitHub Actions mohou mít zpoždění 5-10 minut.
+    - cron: '0 * * * *'
+  # Umožní spustit akci ručně tlačítkem na GitHubu (pro testování)
+  workflow_dispatch:
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    
+    # Důležité: Povolíme akci zapisovat do repozitáře (commitovat obrázek)
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repozitáře
+        uses: actions/checkout@v4
+
+      - name: Nastavit Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Nainstalovat závislosti (Playwright)
+        run: |
+          pip install -r requirements.txt
+          # Playwright potřebuje doinstalovat vlastní jádro prohlížeče
+          playwright install chromium --with-deps
+
+      - name: Spustit screenshot skript
+        run: python screenshot.py
+
+      - name: Commitovat a pushnout obrázek
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add kalendar.png
+          # Commitneme jen pokud se obrázek změnil, aby se repozitář neplnil zbytečně
+          git diff --quiet && git diff --staged --quiet || git commit -m "Automatická obnova kalendáře"
+          git push
