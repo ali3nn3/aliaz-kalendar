@@ -11,6 +11,9 @@ on:
 jobs:
   build_and_publish:
     runs-on: ubuntu-latest
+
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     
     # Důležité: Povolíme akci zapisovat do repozitáře (commitovat obrázek)
     permissions:
