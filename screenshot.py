@@ -5,7 +5,9 @@ import os
 # --- KONFIGURACE ---
 # Vlož sem URL tvého nasazeného Google Apps Scriptu (končící na /exec)
 URL_GOOGLE_SCRIPTU = "https://script.google.com/macros/s/AKfycbxCqK-2hycXEZY6Mgrboq_iHt0Cf3rjhu9SzDuvQmsJq58U1bAQ3S6e9MQfE761nb1w/exec" 
-VYSTUPNI_SOUBOR = "kalendar.png"
+# Najde absolutní cestu k aktuálnímu adresáři, kde běží skript
+current_dir = os.path.dirname(os.path.abspath(__file__))
+VYSTUPNI_SOUBOR = os.path.join(current_dir, "kalendar.png")
 SIRKA = 800
 VYSKA = 600
 # -------------------
