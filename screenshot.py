@@ -12,8 +12,8 @@ SIRKA = 800
 # Vyfotíme trochu víc na výšku, abychom měli co ořezávat
 VYSKA_VYFOCENI = 650 
 # Finální rozměry pro PocketBook
-SIRKA_FINÁLNÍ = 800
-VYSKA_FINÁLNÍ = 600
+SIRKA_FINÁLNÍ = 1024
+VYSKA_FINÁLNÍ = 758
 # Kolik pixelů odshora oříznout (výška proužku + rezerva)
 ORIZNUTE_ODSHORA = 50
 # -------------------
