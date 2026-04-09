@@ -36,7 +36,16 @@ jobs:
 
       - name: Spustit screenshot skript
         run: python screenshot.py
-
+        
+      - name: Otočit a změnit velikost obrázku (800x600)
+        run: |
+          # Nainštalujeme ImageMagick (pre istotu, ak by chýbal)
+          sudo apt-get update && sudo apt-get install -y imagemagick
+          
+          # rotate 90 = otočenie o 90° doprava
+          # resize 800x600! = vynútený rozmer (križik zabezpečí ignorovanie pomeru strán)
+          convert kalendar.png -resize 800x600! -rotate 90 kalendar.png
+          
       - name: Commitovat a pushnout obrázek
         run: |
           git config --global user.name "github-actions[bot]"
