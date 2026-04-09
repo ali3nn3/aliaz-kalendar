@@ -43,8 +43,8 @@ jobs:
           sudo apt-get update && sudo apt-get install -y imagemagick
           
           # rotate 90 = otočenie o 90° doprava
-          # resize 800x600! = vynútený rozmer (križik zabezpečí ignorovanie pomeru strán)
-          convert kalendar.png -resize 800x600! -rotate 90 kalendar.png
+          # resize 1024x758! = vynútený rozmer (križik zabezpečí ignorovanie pomeru strán)
+          convert kalendar.png -resize 1024x758! -rotate 90 kalendar.png
           
       - name: Commitovat a pushnout obrázek
         run: |
