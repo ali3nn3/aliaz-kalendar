@@ -16,7 +16,7 @@ SIRKA_FINÁLNÍ = 758
 VYSKA_FINÁLNÍ = 1024
 
 # Kolik pixelů odshora oříznout (výška proužku + rezerva)
-ORIZNUTE_ODSHORA = 40
+ORIZNUTE_ODSHORA = 50
 # -------------------
 
 async def make_screenshot():
