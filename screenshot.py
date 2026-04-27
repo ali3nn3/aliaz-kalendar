@@ -4,16 +4,17 @@ import os
 
 # --- KONFIGURACE ---
 # Vlož sem URL tvého nasazeného Google Apps Scriptu (končící na /exec)
-URL_GOOGLE_SCRIPTU = "https://script.google.com/macros/s/AKfycbxCqK-2hycXEZY6Mgrboq_iHt0Cf3rjhu9SzDuvQmsJq58U1bAQ3S6e9MQfE761nb1w/exec" 
+URL_GOOGLE_SCRIPTU = "https://script.google.com/macros/s/AKfycbxoUNy8auKoVzliHIJTynmSP91oPSmnfV-fGlA24UVA1JPhj8PXS1u_mVpVRMadNkp7/exec" 
 # Najde absolutní cestu k aktuálnímu adresáři, kde běží skript
 current_dir = os.path.dirname(os.path.abspath(__file__))
 VYSTUPNI_SOUBOR = os.path.join(current_dir, "kalendar.png")
-SIRKA = 800
+SIRKA = 758
 # Vyfotíme trochu víc na výšku, abychom měli co ořezávat
-VYSKA_VYFOCENI = 650 
+VYSKA_VYFOCENI = 1100 
 # Finální rozměry pro PocketBook
-SIRKA_FINÁLNÍ = 1024
-VYSKA_FINÁLNÍ = 758
+SIRKA_FINÁLNÍ = 758
+VYSKA_FINÁLNÍ = 1024
+
 # Kolik pixelů odshora oříznout (výška proužku + rezerva)
 ORIZNUTE_ODSHORA = 50
 # -------------------
