@@ -44,7 +44,7 @@ jobs:
           
           # rotate 90 = otočenie o 90° doprava
           # resize 1026x760! = vynútený rozmer (križik zabezpečí ignorovanie pomeru strán)
-          convert kalendar.png -resize 1026x760! -rotate 90 kalendar.png
+          convert kalendar.png -resize 1026x760! kalendar.png
           
       - name: Commitovat a pushnout obrázek
         run: |
