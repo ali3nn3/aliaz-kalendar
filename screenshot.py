@@ -10,7 +10,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 VYSTUPNI_SOUBOR = os.path.join(current_dir, "kalendar.png")
 SIRKA = 758
 # Vyfotíme trochu víc na výšku, abychom měli co ořezávat
-VYSKA_VYFOCENI = 1100 
+VYSKA_VYFOCENI = 1074 
 # Finální rozměry pro PocketBook
 SIRKA_FINÁLNÍ = 758
 VYSKA_FINÁLNÍ = 1024
